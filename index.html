@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=530, height=334, initial-scale=1.0">
+
+<title>Assignment Tracker</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background: transparent;
+        font-family: Arial, sans-serif;
+    }
+
+    .widget {
+        width: 530px;
+        height: 334px;
+        max-width: 100vw;
+        max-height: 100vh;
+        background: #F9F5F0;
+        border-radius: 18px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* HEADER */
+
+    .header {
+        height: 58px;
+        min-height: 58px;
+        background: #F5C0B9;
+        display: flex;
+        align-items: center;
+        padding: 0 22px;
+    }
+
+    .header-title {
+        color: #F9DDD6;
+        font-family: "Bodoni Moda", Georgia, serif;
+        font-size: 22px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+    }
+
+    /* ASSIGNMENT AREA */
+
+    .assignments {
+        padding: 13px 18px 10px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .assignment {
+        display: grid;
+        grid-template-columns: 1fr 145px;
+        align-items: center;
+        min-height: 52px;
+        border-bottom: 1px solid rgba(0,0,0,0.12);
+        gap: 14px;
+    }
+
+    .assignment:last-child {
+        border-bottom: none;
+    }
+
+    /* EDITABLE TEXT */
+
+    .assignment-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+    }
+
+    .assignment-name,
+    .assignment-details {
+        outline: none;
+        border: none;
+        background: transparent;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+
+    .assignment-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .assignment-details {
+        font-size: 10px;
+        color: #777;
+    }
+
+    .assignment-name:empty:before {
+        content: "Assignment name";
+        color: #999;
+    }
+
+    .assignment-details:empty:before {
+        content: "Add details...";
+        color: #aaa;
+    }
+
+    /* PROGRESS */
+
+    .progress-area {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .progress-number {
+        min-width: 20px;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 110px;
+        height: 5px;
+        background: #e1d9d3;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #F5C0B9;
+        border: 2px solid #ffffff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+        cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #F5C0B9;
+        border: 2px solid #ffffff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+        cursor: pointer;
+    }
+
+    /* MOBILE / SMALL NOTION EMBED */
+
+    @media (max-width: 530px) {
+        .widget {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 18px;
+        }
+
+        .assignment {
+            grid-template-columns: 1fr 135px;
+        }
+
+        input[type="range"] {
+            width: 100px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="widget">
+
+    <div class="header">
+        <div class="header-title">
+            Assignment Tracker
+        </div>
+    </div>
+
+    <div class="assignments">
+
+        <!-- ASSIGNMENT 1 -->
+        <div class="assignment">
+            <div class="assignment-info">
+                <div
+                    class="assignment-name"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+
+                <div
+                    class="assignment-details"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+            </div>
+
+            <div class="progress-area">
+                <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    value="1"
+                    step="1"
+                    oninput="updateProgress(this)">
+                <span class="progress-number">1/5</span>
+            </div>
+        </div>
+
+
+        <!-- ASSIGNMENT 2 -->
+        <div class="assignment">
+            <div class="assignment-info">
+                <div
+                    class="assignment-name"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+
+                <div
+                    class="assignment-details"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+            </div>
+
+            <div class="progress-area">
+                <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    value="1"
+                    step="1"
+                    oninput="updateProgress(this)">
+                <span class="progress-number">1/5</span>
+            </div>
+        </div>
+
+
+        <!-- ASSIGNMENT 3 -->
+        <div class="assignment">
+            <div class="assignment-info">
+                <div
+                    class="assignment-name"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+
+                <div
+                    class="assignment-details"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+            </div>
+
+            <div class="progress-area">
+                <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    value="1"
+                    step="1"
+                    oninput="updateProgress(this)">
+                <span class="progress-number">1/5</span>
+            </div>
+        </div>
+
+
+        <!-- ASSIGNMENT 4 -->
+        <div class="assignment">
+            <div class="assignment-info">
+                <div
+                    class="assignment-name"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+
+                <div
+                    class="assignment-details"
+                    contenteditable="true"
+                    spellcheck="false">
+                </div>
+            </div>
+
+            <div class="progress-area">
+                <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    value="1"
+                    step="1"
+                    oninput="updateProgress(this)">
+                <span class="progress-number">1/5</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function updateProgress(slider) {
+
+    const number = slider.parentElement.querySelector(".progress-number");
+
+    number.textContent = slider.value + "/5";
+
+    const percentage =
+        ((slider.value - 1) / 4) * 100;
+
+    slider.style.background =
+        `linear-gradient(
+            to right,
+            #F5C0B9 ${percentage}%,
+            #e1d9d3 ${percentage}%
+        )`;
+}
+
+</script>
+
+</body>
+</html>
